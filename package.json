@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "esbuild": "0.25.5"
+  },
+  "dependencies": {
+    "@iarna/toml": "^2.2.5",
+    "stream": "^0.0.3"
+  }
+}

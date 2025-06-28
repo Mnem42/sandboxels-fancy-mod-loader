@@ -1,0 +1,5 @@
+[mod]
+name = "Test mod"
+version = "0.1.0"
+# A very real mod that deletes all animals
+entry_point = "mods/mod_for_mnem.js"
