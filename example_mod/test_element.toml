@@ -1,4 +1,6 @@
-name = "test_element_b"
+# An example element with some *very strange* properties
+
+name = "test_element"
 color = ["#FF00FF", "#00FF00"]
 state = "solid"
 behaviour = [["XX","XX","XX"],["XX","XX","XX"],["XX","XX","XX"]]
