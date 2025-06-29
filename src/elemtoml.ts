@@ -5,42 +5,44 @@ import { Optional } from "utility-types"
 
 type _Reaction = {
     elem1: string,
-    elem2: string
+    elem2: string,
+    chance: number,
+    tempMin: number
 }
 
+// An element
 type _Element = {
-    // Element name
     name: string,
-    
-    // Colour (array of "#RRGGBB")
     color: Array<string>,
-
-    // State
+    category: string,
     state: string,
 
-    // Behaviour
+    density: number,
+    conduct: number,
+
     behaviour: [
         [string,string,string],
         [string,string,string],
         [string,string,string]
     ],
 
-    // Category
-    category: string,
-
     tempHigh: number,
     stateHigh: string,
-    density: number,
-    conduct: number,
 
-    // Reaction array
+    tempLow: number,
+    stateLow: number
+
     reactions: {[elem: string]: Reaction}
 }
 
 // Encodes a sandboxels element
-export type Element = Optional<_Element, "tempHigh" | "stateHigh" | "density" | "conduct">
+export type Element = Optional<_Element, 
+    "tempHigh" | "stateHigh" | 
+    "tempLow"  | "stateLow"  |
+    "density"  | "conduct"
+>
 // A reaction for a sandboxels element
-export type Reaction = Optional<_Reaction, "elem2">
+export type Reaction = Optional<_Reaction, "elem2" | "chance">
 
 export type ElementDict = {[name: string] : Element}
 

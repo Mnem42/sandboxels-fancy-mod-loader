@@ -11,6 +11,6 @@ density = 100
 conduct = 1.0
 
 [reactions]
-water = {elem = "ash", elem2 = "pop"}
-cement = {elem1 = "sand"}
-blood = {elem1 = "n_explosion"}
+water = {elem = "ash", elem2 = "pop", tempMin = -50, chance = 0.1}
+cement = {elem1 = "sand", tempMin = 50}
+blood = {elem1 = "n_explosion", chance = 0.05}

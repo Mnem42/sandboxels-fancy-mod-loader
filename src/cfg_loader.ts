@@ -1,16 +1,24 @@
 import { Element, register_element, register_elements } from "./elemtoml"
 import { parse } from "@iarna/toml"
 
+// Element info (for imports)
 type ElementImport = {
     path: string,
     name: string
 }
 
+// Mod config
 export type ModConfig = {
+    // Mod name
     name: string
+
+    // Mod version
     version: string
+
+    // JS entry point
     entry_point: string
 
+    // Elements that have to be loaded
     external_elements: Array<ElementImport>
 }
 
