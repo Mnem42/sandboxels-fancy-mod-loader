@@ -1,8 +1,8 @@
 // Deals with searching for mods
 
 export function find_mod(name: string, onfind: (result: string) => void){
-    console.log(name, `mods/${name}/mod.toml`)
-    fetch(`mods/${name}/mod.toml`)
+    console.log(name, `${name}/mod.toml`)
+    fetch(`${name}/mod.toml`)
         .then(async (x) => {
             console.log(x.url)
             if (x.ok) {

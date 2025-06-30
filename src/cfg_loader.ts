@@ -1,5 +1,5 @@
 import { Optional } from "utility-types"
-import { Element, register_element, register_elements } from "./elemtoml"
+import { Element, ElementDict, register_element, register_elements } from "./elemtoml"
 import { parse } from "@iarna/toml"
 
 // Element info (for imports)
@@ -13,16 +13,9 @@ type ElementImport = Optional<_ElementImport, "postload_script">
 
 // Mod config
 export type ModConfig = {
-    // Mod name
     name: string
-
-    // Mod version
     version: string
-
-    // JS entry point
     entry_point: string
-
-    // Elements that have to be loaded
     external_elements: Array<ElementImport>
 }
 
@@ -39,7 +32,7 @@ export class Package{
         console.log(this)
     }
 
-    async load_elems(this: Package){
+    async load_elems(this: Package): Promise<ElementDict>{
         for (const i of this.cfg.mod.external_elements) {
             console.log(i)
 
@@ -53,6 +46,13 @@ export class Package{
                 console.error(err)
             }
         }
+
+        let tmp: ElementDict = {}
+        this.loaded_elems.forEach(elem => {
+            tmp[elem.name] = elem
+        });
+
+        return tmp
     }
 
     get_loaded_elems(this: Package){

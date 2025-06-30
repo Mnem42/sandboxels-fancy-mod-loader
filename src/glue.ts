@@ -6,6 +6,7 @@ declare global {
         queuedMods: Array<string>;
         elements: {[name: string]: Element}
         behaviors: {[name: string]: Behaviour}
+        enabledMods: [string]
     }
 }
 

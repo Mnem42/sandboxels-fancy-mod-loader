@@ -54,18 +54,16 @@ export type ElementDict = {[name: string] : Element}
 
 
 export function register_element(name: string, elem: Element): void{
-    console.debug(
+    console.trace(
         "Element registered: ", elem,
         "Under name: ", name,
         "Named behaviour: ", 
             elem.namedBehavior, 
             window.behaviors[elem.namedBehavior as string],
     )
-    console.trace()
-    
+
     let tmp_value = elem
 
-    console.log(tmp_value.namedBehavior)
     if (tmp_value.namedBehavior) {
         const found_behaviour = window.behaviors[tmp_value.namedBehavior]
         if (typeof found_behaviour == "function"){
