@@ -4,8 +4,8 @@ import { parse } from "@iarna/toml"
 import { run_script } from "./utils"
 
 export type _ScriptCfg = {
-    preload: string,
-    postload: string
+    preload: Array<string>,
+    postload: Array<string>
 }
 
 // Element info (for imports)
@@ -68,7 +68,9 @@ export class Package{
     load_mod(){
         console.debug(this.cfg.scripts)
         if (this.cfg.scripts.preload !== undefined){
-            run_script(this.cfg.scripts.preload)
+            for(const i of this.cfg.scripts.preload){
+                run_script(i)
+            }
         }
 
         this.load_elems().then((elems) => {
@@ -78,7 +80,9 @@ export class Package{
         
 
         if (this.cfg.scripts.postload !== undefined){
-            run_script(this.cfg.scripts.postload)
+            for(const i of this.cfg.scripts.postload){
+                run_script(i)
+            }
         }
     }
 }
