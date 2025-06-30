@@ -9,8 +9,7 @@ export function find_mod(name: string, onfind: (result: string) => void){
                 onfind(await x.text());
             }
             else{
-                // Fallback to sandboxels default behaviour
-                window.queuedMods.push(name)
+                // Do nothing, let sandboxels figure it out on its own
             }
         })
         .catch((err) => {console.error(err)})

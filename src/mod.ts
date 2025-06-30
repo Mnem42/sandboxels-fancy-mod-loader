@@ -13,9 +13,7 @@ for(const i of window.enabledMods){
             console.debug("Parsed mod TOML:", toml.parse(text))            
             
             let pkg = new Package(load(parsed))
-            pkg.load_elems().then((elems) => {
-                register_elements(elems)
-            });
+            pkg.load_mod()
 
             console.debug("Loaded mod:", pkg)
         })

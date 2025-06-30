@@ -54,13 +54,7 @@ export type ElementDict = {[name: string] : Element}
 
 
 export function register_element(name: string, elem: Element): void{
-    console.trace(
-        "Element registered: ", elem,
-        "Under name: ", name,
-        "Named behaviour: ", 
-            elem.namedBehavior, 
-            window.behaviors[elem.namedBehavior as string],
-    )
+    console.debug("Element registered: ", elem)
 
     let tmp_value = elem
 

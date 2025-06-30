@@ -1,15 +1,20 @@
 import { Optional } from "utility-types"
 import { Element, ElementDict, register_element, register_elements } from "./elemtoml"
 import { parse } from "@iarna/toml"
+import { run_script } from "./utils"
 
-// Element info (for imports)
-type _ElementImport = {
-    path: string,
-    name: string,
-    postload_script: string
+export type _ScriptCfg = {
+    preload: string,
+    postload: string
 }
 
-type ElementImport = Optional<_ElementImport, "postload_script">
+// Element info (for imports)
+type ElementImport = {
+    path: string,
+    name: string,
+}
+
+type ScriptCfg = Partial<_ScriptCfg>
 
 // Mod config
 export type ModConfig = {
@@ -21,6 +26,7 @@ export type ModConfig = {
 
 export type ParsedPackageConfig = {
     mod: ModConfig
+    scripts: ScriptCfg
 }
 
 export class Package{
@@ -32,10 +38,9 @@ export class Package{
         console.log(this)
     }
 
-    async load_elems(this: Package): Promise<ElementDict>{
+    private async load_elems(this: Package): Promise<ElementDict>{
         for (const i of this.cfg.mod.external_elements) {
-            console.log(i)
-
+            console.log("loading element:", i)
             try{
                 let resp = await fetch(i.path)
                 const parsed = parse(await resp.text())
@@ -59,11 +64,22 @@ export class Package{
         return this.loaded_elems
     }
 
-    run(){
-        fetch(this.cfg.mod.entry_point)
-            .then((resp) => {
-                resp.text().then((x) => Function(x)())
-            }) // What could *possibly* go wrong
+
+    load_mod(){
+        console.debug(this.cfg.scripts)
+        if (this.cfg.scripts.preload !== undefined){
+            run_script(this.cfg.scripts.preload)
+        }
+
+        this.load_elems().then((elems) => {
+            console.debug("elems:", elems)
+            register_elements(elems)
+        });
+        
+
+        if (this.cfg.scripts.postload !== undefined){
+            run_script(this.cfg.scripts.postload)
+        }
     }
 }
 
