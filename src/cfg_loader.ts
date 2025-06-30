@@ -1,11 +1,15 @@
+import { Optional } from "utility-types"
 import { Element, register_element, register_elements } from "./elemtoml"
 import { parse } from "@iarna/toml"
 
 // Element info (for imports)
-type ElementImport = {
+type _ElementImport = {
     path: string,
-    name: string
+    name: string,
+    postload_script: string
 }
+
+type ElementImport = Optional<_ElementImport, "postload_script">
 
 // Mod config
 export type ModConfig = {
@@ -43,7 +47,7 @@ export class Package{
                 let resp = await fetch(i.path)
                 const parsed = parse(await resp.text())
                 console.log(parsed)
-                register_element(i.name, parsed as Element)
+                register_element(i.name, parsed as any as Element)
             }
             catch (err) {
                 console.error(err)
