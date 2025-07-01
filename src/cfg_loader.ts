@@ -3,17 +3,23 @@ import { Element, ElementDict, register_element, register_elements } from "./ele
 import { parse } from "@iarna/toml"
 import { run_script } from "./utils"
 
+
 export type _ScriptCfg = {
     preload: Array<string>,
     postload: Array<string>
 }
 
-// Element info (for imports)
+/**
+ * ExternalElement info (for import)
+ */
 type ElementImport = {
     path: string,
     name: string,
 }
 
+/**
+ * Config entry for a script config
+ */
 type ScriptCfg = Partial<_ScriptCfg>
 
 // Mod config
@@ -29,15 +35,38 @@ export type ParsedPackageConfig = {
     scripts: ScriptCfg
 }
 
-export class Package{
-    cfg: ParsedPackageConfig
-    loaded_elems: Array<Element> = []
+/**
+ * A mod
+ */
+export class Package {
+    /**
+     * The TOML config for this package.
+     */
+    cfg: ParsedPackageConfig;
 
+    /**
+     * The list of elements that have been loaded for this package.
+     */
+    loaded_elems: Array<Element> = [];
+
+    /**
+     * Constructs a new Package instance with the given configuration (as loaded
+     * from a TOML configuration).
+     * 
+     * @param config The parsed package configuration.
+     */
     constructor(config: ParsedPackageConfig){
         this.cfg = config
         console.log(this)
     }
 
+    /**
+     * Loads external elements defined in the package configuration.
+     * Fetches, parses, and registers each element.
+     * 
+     * @returns A promise that resolves to an `ElementDict`
+     * @private
+     */
     private async load_elems(this: Package): Promise<ElementDict>{
         for (const i of this.cfg.mod.external_elements) {
             console.log("loading element:", i)
@@ -60,12 +89,19 @@ export class Package{
         return tmp
     }
 
-    get_loaded_elems(this: Package){
+    /**
+     * Retrieves the list of elements that have been loaded for this package.
+     * @returns An array of loaded elements.
+     */
+    get_loaded_elems(this: Package): Array<Element>{
         return this.loaded_elems
     }
 
-
-    load_mod(){
+    /**
+     * Loads the mod by running preload scripts, loading elements, and running postload scripts.
+     * Registers loaded elements after fetching and parsing them.
+     */
+    load_mod(): void{
         console.debug(this.cfg.scripts)
         if (this.cfg.scripts.preload !== undefined){
             for(const i of this.cfg.scripts.preload){
@@ -84,7 +120,7 @@ export class Package{
                 run_script(i)
             }
         }
-    }
+    };
 }
 
 // What could *possibly* go wrong, indeed

@@ -1,5 +1,9 @@
-// Deals with searching for mods
-
+/**
+ * Finds a mod.
+ * 
+ * @param name Name of mod to find
+ * @param onfind Callback to run after finding mod
+ */
 export function find_mod(name: string, onfind: (result: string) => void){
     console.log(name, `${name}/mod.toml`)
     fetch(`${name}/mod.toml`)
