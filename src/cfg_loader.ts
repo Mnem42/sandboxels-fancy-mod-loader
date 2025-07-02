@@ -28,6 +28,7 @@ export type ModConfig = {
     version: string
     entry_point: string
     external_elements: Array<ElementImport>
+    incompatible_mods: Array<string>
 }
 
 export type ParsedPackageConfig = {
@@ -102,6 +103,21 @@ export class Package {
      * Registers loaded elements after fetching and parsing them.
      */
     load_mod(): void{
+        const incompatibilities = window.enabledMods
+            .filter((x) => this.cfg.mod.incompatible_mods.includes(x))
+
+        if (incompatibilities.length != 0) {
+            // TODO: throw an error and do this in the calling code
+            window.addEventListener('load', () => {
+                window.promptText(
+                    `A: ${this.cfg.mod.name} \n\
+                    B: ${incompatibilities.join(", ")}`,
+                    () => {},
+                    "Mod incompatibility"
+                )
+            });
+            return;
+        }
         console.debug(this.cfg.scripts)
         if (this.cfg.scripts.preload !== undefined){
             for(const i of this.cfg.scripts.preload){

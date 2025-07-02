@@ -15,6 +15,11 @@ declare global {
             text: string, 
             handler: (was_yes: boolean) => void, 
             heading: string) => void
+
+        promptText: (
+            text: string, 
+            handler: () => void, 
+            heading: string) => void
     }
 }
 
