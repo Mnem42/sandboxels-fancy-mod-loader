@@ -99,8 +99,7 @@ export class Package {
     }
 
     /**
-     * Loads the mod by running preload scripts, loading elements, and running postload scripts.
-     * Registers loaded elements after fetching and parsing them.
+     * Loads the mod, runs scripts, and registers elements.
      */
     load_mod(prompt_quene: &Array<Function>): void{
         const incompatibilities = window.enabledMods
