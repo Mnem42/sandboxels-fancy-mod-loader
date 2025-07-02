@@ -102,13 +102,13 @@ export class Package {
      * Loads the mod by running preload scripts, loading elements, and running postload scripts.
      * Registers loaded elements after fetching and parsing them.
      */
-    load_mod(): void{
+    load_mod(prompt_quene: &Array<Function>): void{
         const incompatibilities = window.enabledMods
             .filter((x) => this.cfg.mod.incompatible_mods.includes(x))
 
         if (incompatibilities.length != 0) {
             // TODO: throw an error and do this in the calling code
-            window.addEventListener('load', () => {
+            prompt_quene.push(() => {
                 window.promptText(
                     `A: ${this.cfg.mod.name} \n\
                     B: ${incompatibilities.join(", ")}`,
