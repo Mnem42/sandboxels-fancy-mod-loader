@@ -10,6 +10,11 @@ export type _ScriptCfg = {
 }
 
 /**
+ * Config entry for a script config
+ */
+type ScriptCfg = Partial<_ScriptCfg>
+
+/**
  * ExternalElement info (for import)
  */
 type ElementImport = {
@@ -17,21 +22,17 @@ type ElementImport = {
     name: string,
 }
 
-/**
- * Config entry for a script config
- */
-type ScriptCfg = Partial<_ScriptCfg>
-
 // Mod config
 type _ModConfig = {
     name: string
     version: string
+    description: string
     entry_point: string
     external_elements: Array<ElementImport>
     incompatible_mods: Array<string>
 }
 
-type ModConfig = Optional<_ModConfig, "incompatible_mods">
+export type ModConfig = Optional<_ModConfig, "incompatible_mods" | "description">
 
 export type ParsedPackageConfig = {
     mod: ModConfig
@@ -98,6 +99,10 @@ export class Package {
      */
     get_loaded_elems(this: Package): Array<Element>{
         return this.loaded_elems
+    }
+
+    get_info(this: Package): ModConfig{
+        return this.cfg.mod
     }
 
     /**
