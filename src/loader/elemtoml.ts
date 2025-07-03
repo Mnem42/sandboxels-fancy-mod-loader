@@ -35,6 +35,8 @@ type _Element = {
     state: string,
     density: number,
     conduct: number,
+    movable: boolean,
+    breakInto: string
 
     behavior: Behaviour,
     namedBehavior: string
@@ -59,6 +61,8 @@ type _Element = {
  * @property state: The state of the element (e.g., solid, liquid, gas).
  * @property density: The density of the element.
  * @property conduct: The conductivity value of the element.
+ * @property breakInto: What an element breaks into
+ * @property movable: Whether an element can be dragged
  * @property behavior: The behavior definition for the element.
  * @property namedBehavior: Accesses `behaviors.[name].`
  * @property tempHigh: The temperature at which the element changes to a different element (high).
