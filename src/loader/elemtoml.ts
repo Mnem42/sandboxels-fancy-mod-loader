@@ -3,9 +3,9 @@
  */
 
 import "utility-types"
-import "./glue"
+import "../mod/glue"
 import { Optional } from "utility-types"
-import { Pixel } from "./glue"
+import { Pixel } from "../mod/glue"
 
 /**
  * A callback (as used by sandboxels for an element's `tick` callback)

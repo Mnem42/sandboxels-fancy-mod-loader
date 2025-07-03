@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
+    "fs": "^0.0.1-security",
     "stream": "^0.0.3",
     "utility-types": "^3.11.0"
   },

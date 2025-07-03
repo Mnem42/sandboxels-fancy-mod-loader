@@ -1,7 +1,8 @@
 import * as esbuild from 'esbuild'
+import * as fs from 'fs'
 
 await esbuild.build({
-  entryPoints: ['src/mod.ts'],
+  entryPoints: ['src/mod/mod.ts'],
   outfile: "sandboxels/mods/fancy_loader.js",
   platform: "browser",
 
@@ -12,7 +13,8 @@ await esbuild.build({
     js: "// fancy_loader.js"
   },
   define: {
-    global:"globalThis"
+    global: "globalThis",
+    //external_styles: stylesheet
   },
 }).then((result) =>{
     console.log("Build finished")

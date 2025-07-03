@@ -1,4 +1,4 @@
-import {Behaviour, Element, TickFn} from "./elemtoml"
+import {Behaviour, Element, TickFn} from "../loader/elemtoml"
 export {}; // Ensure this file is a module
 
 /**
