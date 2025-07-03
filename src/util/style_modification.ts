@@ -1,5 +1,5 @@
 export function load_styles() {
-    var style = document.createElement('style');
+    const style = document.createElement('style');
     style.innerHTML = `\
     .infobtn { color: #0000FF; margin-left: 5px;}\
     .infobtn:hover {color: #6666FF}\
