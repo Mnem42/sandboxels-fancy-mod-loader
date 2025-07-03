@@ -23,13 +23,15 @@ type ElementImport = {
 type ScriptCfg = Partial<_ScriptCfg>
 
 // Mod config
-export type ModConfig = {
+type _ModConfig = {
     name: string
     version: string
     entry_point: string
     external_elements: Array<ElementImport>
     incompatible_mods: Array<string>
 }
+
+type ModConfig = Optional<_ModConfig, "incompatible_mods">
 
 export type ParsedPackageConfig = {
     mod: ModConfig
@@ -74,7 +76,7 @@ export class Package {
             try{
                 let resp = await fetch(i.path)
                 const parsed = parse(await resp.text())
-                console.log(parsed)
+                console.log("Parsed elem:", parsed as any as Element)
                 register_element(i.name, parsed as any as Element)
             }
             catch (err) {
@@ -102,20 +104,26 @@ export class Package {
      * Loads the mod, runs scripts, and registers elements.
      */
     load_mod(prompt_quene: &Array<Function>): void{
-        const incompatibilities = window.enabledMods
-            .filter((x) => this.cfg.mod.incompatible_mods.includes(x))
-
-        if (incompatibilities.length != 0) {
-            // TODO: throw an error and do this in the calling code
-            prompt_quene.push(() => {
-                window.promptText(
-                    `A: ${this.cfg.mod.name} \n\
-                    B: ${incompatibilities.join(", ")}`,
-                    () => {},
-                    "Mod incompatibility"
+        if(this.cfg.mod.incompatible_mods != undefined){
+            console.log("whar")
+            const incompatibilities = window.enabledMods
+                .filter((x) => 
+                    this.cfg.mod.incompatible_mods !== undefined && 
+                    this.cfg.mod.incompatible_mods.includes(x)
                 )
-            });
-            return;
+
+            if (incompatibilities.length != 0) {
+                // TODO: throw an error and do this in the calling code
+                prompt_quene.push(() => {
+                    window.promptText(
+                        `A: ${this.cfg.mod.name} \n\
+                        B: ${incompatibilities.join(", ")}`,
+                        () => {},
+                        "Mod incompatibility"
+                    )
+                });
+                return;
+            }   
         }
         console.debug(this.cfg.scripts)
         if (this.cfg.scripts.preload !== undefined){

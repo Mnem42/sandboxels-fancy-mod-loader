@@ -5,9 +5,6 @@ import "../util/style_modification"
 import { load_styles as apply_styles } from "../util/style_modification"
 import { check_if_at_start, load_mods } from "./utils"
 
-
-
-
 let prompt_quene: Array<Function> = []
 
 apply_styles()
