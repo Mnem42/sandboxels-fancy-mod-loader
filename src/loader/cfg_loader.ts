@@ -24,7 +24,6 @@ type ElementImport = {
 
 // Mod config
 type _ModConfig = {
-    name: string
     version: string
     description: string
     entry_point: string
@@ -47,6 +46,10 @@ export class Package {
      * The TOML config for this package.
      */
     cfg: ParsedPackageConfig;
+    /**
+     * The path the mod is from
+     */
+    path_from: string;
 
     /**
      * The list of elements that have been loaded for this package.
@@ -59,8 +62,9 @@ export class Package {
      * 
      * @param config The parsed package configuration.
      */
-    constructor(config: ParsedPackageConfig){
+    constructor(config: ParsedPackageConfig, path_from: string){
         this.cfg = config
+        this.path_from = path_from
         console.log(this)
     }
 
@@ -121,7 +125,7 @@ export class Package {
                 // TODO: throw an error and do this in the calling code
                 prompt_quene.push(() => {
                     window.promptText(
-                        `A: ${this.cfg.mod.name} \n\
+                        `A: ${this.path_from} \n\
                         B: ${incompatibilities.join(", ")}`,
                         () => {},
                         "Mod incompatibility"

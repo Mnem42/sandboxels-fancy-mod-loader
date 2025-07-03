@@ -36,7 +36,7 @@ function load_mods(prompt_quene: Array<Function>){
                 const parsed = toml.parse(text)
                 console.debug("Parsed mod TOML:", toml.parse(text))            
                 
-                let pkg = new Package(load(parsed))
+                let pkg = new Package(load(parsed), i)
                 pkg.load_mod(prompt_quene)
 
                 console.debug("Loaded mod:", pkg)
