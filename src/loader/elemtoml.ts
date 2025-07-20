@@ -45,7 +45,7 @@ type _Element = {
     stateHigh: string,
 
     tempLow: number,
-    stateLow: number,
+    stateLow: string,
 
     reactions: {[elem: string]: Reaction},
     tick: TickFn

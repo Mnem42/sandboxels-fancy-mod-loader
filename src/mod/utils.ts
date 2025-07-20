@@ -1,4 +1,4 @@
-import { load, Package } from "../loader/cfg_loader";
+import { load, ModConfig, Mod } from "../loader/cfg_loader";
 import { find_mod } from "../loader/mod_finder";
 import toml from "@iarna/toml"
 
@@ -28,16 +28,19 @@ function check_if_at_start(prompt_quene: Array<Function>){
     }
 }
 
-function load_mods(prompt_quene: Array<Function>){
+async function load_mods(
+    prompt_quene: Function[], 
+    onload: (pkg: Mod) => void
+){
     for(const i of window.enabledMods){    
         if (i.endsWith(".toml")) {    
             console.trace("Loading mod:", i, i.slice(0, -5))   
-            find_mod(i.slice(0, -5), (text) =>{
+            await find_mod(i.slice(0, -5), (text) =>{
                 const parsed = toml.parse(text)
                 console.debug("Parsed mod TOML:", toml.parse(text))            
                 
-                let pkg = new Package(load(parsed), i)
-                pkg.load_mod(prompt_quene)
+                let pkg = new Mod(load(parsed), i)
+                onload(pkg)
 
                 console.debug("Loaded mod:", pkg)
             })

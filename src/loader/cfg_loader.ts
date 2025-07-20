@@ -41,7 +41,7 @@ export type ParsedPackageConfig = {
 /**
  * A mod
  */
-export class Package {
+export class Mod {
     /**
      * The TOML config for this package.
      */
@@ -65,7 +65,6 @@ export class Package {
     constructor(config: ParsedPackageConfig, path_from: string){
         this.cfg = config
         this.path_from = path_from
-        console.log(this)
     }
 
     /**
@@ -75,7 +74,7 @@ export class Package {
      * @returns A promise that resolves to an `ElementDict`
      * @private
      */
-    private async load_elems(this: Package): Promise<ElementDict>{
+    private async load_elems(this: Mod): Promise<ElementDict>{
         for (const i of this.cfg.mod.external_elements) {
             console.log("loading element:", i)
             try{
@@ -101,18 +100,18 @@ export class Package {
      * Retrieves the list of elements that have been loaded for this package.
      * @returns An array of loaded elements.
      */
-    get_loaded_elems(this: Package): Array<Element>{
+    get_loaded_elems(this: Mod): Array<Element>{
         return this.loaded_elems
     }
 
-    get_info(this: Package): ModConfig{
+    get_info(this: Mod): ModConfig{
         return this.cfg.mod
     }
 
     /**
      * Loads the mod, runs scripts, and registers elements.
      */
-    load_mod(prompt_quene: &Array<Function>): void{
+    load_mod(prompt_quene: Array<Function>): void{
         if(this.cfg.mod.incompatible_mods != undefined){
             console.log("whar")
             const incompatibilities = window.enabledMods
