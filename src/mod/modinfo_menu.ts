@@ -2,7 +2,7 @@
 const BASE_HTML = `
 <div id="modInfo" class="menuScreen">
     <button class="XButton">-</button>
-    <span class="menuTitle" style="color: unset;">Testing mod</span>
+    <span id="mod_name" class="menuTitle" style="color: unset;"></span>
     <div class="menuText" style="padding-top:1em">
         <div id="promptMenuText">
             <span id="mod_version"></span>
@@ -46,13 +46,19 @@ const DESCRIPTION_PLACEHOLDER = `
 }
 
 /// Show the mod info menu
-export function show_modinfo(version: string, description: string | undefined){
+export function show_modinfo(
+    name: string, 
+    version: string, 
+    description: string | undefined
+){
     let elem = document.getElementById("modinfo_parent")
     if (elem){
         let version_elem = document.getElementById("mod_version")
         let description_elem = document.getElementById("mod_description")
+        let name_elem = document.getElementById("mod_name")
 
-        if (version_elem && description_elem){
+        if (version_elem && description_elem && name_elem){
+            name_elem.textContent = name 
             version_elem.textContent = "Version: " + version
             
             if (description) description_elem.innerText = "Description: " + description

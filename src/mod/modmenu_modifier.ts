@@ -16,8 +16,9 @@ export function add_modinfo_btn(mod: Mod){
             elem.innerText = 'i'
             elem.onclick = () =>{
                 show_modinfo(
+                    mod.cfg.mod.name ?? mod.path_from,
                     mod.cfg.mod.version, 
-                    undefined
+                    mod.cfg.mod.description
                 )
             }
 
