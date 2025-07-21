@@ -4,15 +4,13 @@ import { parse } from "@iarna/toml"
 import { run_script } from "../mod/run_scripts"
 
 
-export type _ScriptCfg = {
-    preload: Array<string>,
-    postload: Array<string>
-}
-
 /**
- * Config entry for a script config
+ * Configuration for the scripts section
  */
-type ScriptCfg = Partial<_ScriptCfg>
+export type ScriptCfg = {
+    preload?: Array<string>,
+    postload?: Array<string>
+}
 
 /**
  * ExternalElement info (for import)
@@ -23,16 +21,14 @@ type ElementImport = {
 }
 
 // Mod config
-type _ModConfig = {
-    name: string,
-    version: string
-    description: string
+type ModConfig = {
+    name?: string,
+    version: string,
+    description?: string,
     entry_point: string
     external_elements: Array<ElementImport>
-    incompatible_mods: Array<string>
+    incompatible_mods?: Array<string>
 }
-
-export type ModConfig = Optional<_ModConfig, "incompatible_mods" | "description" | "name">
 
 export type ParsedPackageConfig = {
     mod: ModConfig

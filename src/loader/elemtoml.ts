@@ -21,36 +21,21 @@ export type Behaviour = [
     [string, string, string]
 ]
 
-type _Reaction = {
+/**
+ * A sandboxels reaction
+ *
+ * @property elem1: The identifier of the first element involved in the reaction.
+ * @property elem2: The identifier of the second element involved in the reaction.
+ * @property chance: The probability (as a number between 0 and 1) that the reaction occurs.
+ * @property tempMin: The minimum temperature required for the reaction to take place.
+ */
+export type Reaction = {
     elem1: string,
-    elem2: string,
-    chance: number,
-    tempMin: number
+    elem2?: string,
+    chance?: number,
+    tempMin?: number,
+    tempMax?: number
 }
-
-type _Element = {
-    name: string,
-    color: Array<string>,
-    category: string,
-    state: string,
-    density: number,
-    conduct: number,
-    movable: boolean,
-    breakInto: string
-
-    behavior: Behaviour,
-    namedBehavior: string
-
-    tempHigh: number,
-    stateHigh: string,
-
-    tempLow: number,
-    stateLow: string,
-
-    reactions: {[elem: string]: Reaction},
-    tick: TickFn
-}
-
 
 /**
  * A representation of an element in the TOML format used
@@ -72,22 +57,28 @@ type _Element = {
  * @property reactions: The list of `Reaction`s.
  * @property tick: The callback run on each tick.
  */
-export type Element = Optional<_Element, 
-    "tempHigh" | "stateHigh"      | 
-    "tempLow"  | "stateLow"       |
-    "density"  | "conduct"        |
-    "behavior" | "namedBehavior"
->
+export type Element = {
+    name: string,
+    color: Array<string>,
+    category: string,
+    state: string,
+    density?: number,
+    conduct?: number,
+    movable?: boolean,
+    breakInto?: string
 
-/**
- * A sandboxels reaction
- *
- * @property elem1: The identifier of the first element involved in the reaction.
- * @property elem2: The identifier of the second element involved in the reaction.
- * @property chance: The probability (as a number between 0 and 1) that the reaction occurs.
- * @property tempMin: The minimum temperature required for the reaction to take place.
- */
-export type Reaction = Optional<_Reaction, "elem2" | "chance">
+    behavior?: Behaviour,
+    namedBehavior?: string
+
+    tempHigh?: number,
+    stateHigh?: string,
+
+    tempLow?: number,
+    stateLow?: string,
+
+    reactions?: {[elem: string]: Reaction},
+    tick?: TickFn
+}
 
 export type ElementDict = {[name: string]: Element}
 
