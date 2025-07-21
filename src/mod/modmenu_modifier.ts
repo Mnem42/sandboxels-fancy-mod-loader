@@ -14,7 +14,7 @@ export function add_modinfo_btn(mod: Mod){
             let elem = document.createElement('button')
             elem.classList.add("infobtn")
             elem.innerText = 'i'
-            elem.onclick = () =>{
+            elem.onclick = () => {
                 show_modinfo(
                     mod.cfg.mod.name ?? mod.path_from,
                     mod.cfg.mod.version, 
