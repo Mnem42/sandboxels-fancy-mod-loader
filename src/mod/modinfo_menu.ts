@@ -1,31 +1,5 @@
-/// Base HTML to generate the mod info menu from
-const BASE_HTML = `
-<div id="modInfo" class="menuScreen">
-    <button class="XButton">-</button>
-    <span id="mod_name" class="menuTitle" style="color: unset;"></span>
-    <div class="menuText" style="padding-top:1em">
-        <div id="promptMenuText">
-            <span id="mod_version"></span>
-            <br>                    
-            <span id="mod_description">s</span>
-        </span>
-        <br><br><br>
-    </div>
-</div>
-`
+import { MODINFO_BASE_HTML, MODINFO_DESCRIPTION_PLACEHOLDER } from "../util/html_css_constants"
 
-/// Placeholder CSS
-const PLACEHOLDER_CSS = `
-    color: #666666;\
-    font-style: italic;
-`
-
-/// Description placeholder HTML
-const DESCRIPTION_PLACEHOLDER = `
-<span style="${PLACEHOLDER_CSS}">
-    No description provided
-</span>
-`
 
 // ---- Initialise prompt, but hide it to start with
 {
@@ -34,7 +8,7 @@ const DESCRIPTION_PLACEHOLDER = `
     let div = document.createElement('div')
     div.classList.add("menuParent")
     div.id = "modinfo_parent"
-    div.innerHTML = BASE_HTML
+    div.innerHTML = MODINFO_BASE_HTML
 
     // It's guaranteed to be an html element
     let closebtn = div.firstElementChild as HTMLElement
@@ -62,7 +36,7 @@ export function show_modinfo(
             version_elem.textContent = "Version: " + version
             
             if (description) description_elem.innerText = "Description: " + description
-            else description_elem.innerHTML = DESCRIPTION_PLACEHOLDER
+            else description_elem.innerHTML = MODINFO_DESCRIPTION_PLACEHOLDER
         }
 
         elem.style.display = "block"
