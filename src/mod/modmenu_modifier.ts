@@ -19,7 +19,10 @@ export function add_modinfo_btn(mod: Mod){
                 window.promptText(
                     `Version: ${mod.cfg.mod.version}\n\
                     Description: ${mod.cfg.mod.description}`,
-                    () => {},
+                    () => {
+                        // Make the mod manager visible again
+                        window.showModManager()
+                    },
                     mod.path_from
                 )
             }

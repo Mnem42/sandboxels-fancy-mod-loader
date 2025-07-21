@@ -14,12 +14,16 @@ declare global {
         promptConfirm: (
             text: string, 
             handler: (was_yes: boolean) => void, 
-            heading: string) => void
+            heading: string
+        ) => void
 
         promptText: (
             text: string, 
             handler: () => void, 
-            heading: string) => void
+            heading: string
+        ) => void
+
+        showModManager: () => void
     }
 }
 
