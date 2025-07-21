@@ -2,9 +2,6 @@
  * Module for defining elements and loading them
  */
 
-import "utility-types"
-import "../mod/glue"
-import { Optional } from "utility-types"
 import { Pixel } from "../mod/glue"
 
 /**

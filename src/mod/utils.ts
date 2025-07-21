@@ -1,4 +1,4 @@
-import { load, ModConfig, Mod } from "../loader/cfg_loader";
+import { load, Mod } from "../loader/cfg_loader";
 import { find_mod } from "../loader/mod_finder";
 import toml from "@iarna/toml"
 

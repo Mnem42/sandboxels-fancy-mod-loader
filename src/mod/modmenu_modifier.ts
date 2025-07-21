@@ -1,6 +1,4 @@
-import { load, Mod, ParsedPackageConfig } from "../loader/cfg_loader"
-import { find_mod } from "../loader/mod_finder"
-import toml from "@iarna/toml"
+import { Mod } from "../loader/cfg_loader"
 
 export function add_modinfo_btn(mod: Mod){
     let menu = document.getElementById("modManagerList")

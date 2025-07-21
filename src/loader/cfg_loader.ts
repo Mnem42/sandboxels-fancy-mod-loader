@@ -1,4 +1,3 @@
-import { Optional } from "utility-types"
 import { Element, ElementDict, register_element, register_elements } from "./elemtoml"
 import { parse } from "@iarna/toml"
 import { run_script } from "../mod/run_scripts"
