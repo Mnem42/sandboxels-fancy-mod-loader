@@ -7,7 +7,7 @@ import { check_if_at_start, load_mods } from "./utils"
 import { add_modinfo_btn } from "./modmenu_modifier"
 import { Mod } from "../loader/cfg_loader"
 
-let prompt_quene: Array<Function> = []
+let prompt_quene: Function[] = []
 
 apply_styles()
 check_if_at_start(prompt_quene)

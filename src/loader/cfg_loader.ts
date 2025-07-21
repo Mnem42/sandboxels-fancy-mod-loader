@@ -8,8 +8,8 @@ import { run_script } from "../mod/run_scripts"
  * Configuration for the scripts section
  */
 export type ScriptCfg = {
-    preload?: Array<string>,
-    postload?: Array<string>
+    preload?: string[],
+    postload?: string[]
 }
 
 /**
@@ -21,13 +21,13 @@ type ElementImport = {
 }
 
 // Mod config
-type ModConfig = {
+export type ModConfig = {
     name?: string,
     version: string,
     description?: string,
-    entry_point: string
-    external_elements: Array<ElementImport>
-    incompatible_mods?: Array<string>
+    entry_point: string,
+    external_elements: ElementImport[],
+    incompatible_mods?: string[]
 }
 
 export type ParsedPackageConfig = {
@@ -51,7 +51,7 @@ export class Mod {
     /**
      * The list of elements that have been loaded for this package.
      */
-    loaded_elems: Array<Element> = [];
+    loaded_elems: Element[] = [];
 
     /**
      * Constructs a new Package instance with the given configuration (as loaded
@@ -97,7 +97,7 @@ export class Mod {
      * Retrieves the list of elements that have been loaded for this package.
      * @returns An array of loaded elements.
      */
-    get_loaded_elems(this: Mod): Array<Element>{
+    get_loaded_elems(this: Mod): Element[]{
         return this.loaded_elems
     }
 
@@ -108,7 +108,7 @@ export class Mod {
     /**
      * Loads the mod, runs scripts, and registers elements.
      */
-    load_mod(prompt_quene: Array<Function>): void{
+    load_mod(prompt_quene: Function[]): void{
         if(this.cfg.mod.incompatible_mods != undefined){
             console.log("whar")
             const incompatibilities = window.enabledMods

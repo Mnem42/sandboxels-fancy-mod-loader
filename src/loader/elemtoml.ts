@@ -59,7 +59,7 @@ export type Reaction = {
  */
 export type Element = {
     name: string,
-    color: Array<string>,
+    color: string[],
     category: string,
     state: string,
     density?: number,

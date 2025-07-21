@@ -4,15 +4,15 @@ import toml from "@iarna/toml"
 
 export {check_if_at_start, load_mods}
 
-function shuffle_to_start(input: Array<string>, i: number): Array<string>{
+function shuffle_to_start(input: string[], i: number): string[]{
     let tmp = input.filter((x) => x !== input[i])
     tmp.unshift(input[i])
     return tmp
 }
 
 // Checks if the mod is at the start
-function check_if_at_start(prompt_quene: Array<Function>){
-    const mods: Array<string> = JSON.parse(localStorage.getItem("enabledMods") || "")
+function check_if_at_start(prompt_quene: Function[]){
+    const mods: string[] = JSON.parse(localStorage.getItem("enabledMods") || "")
     if (mods[0] !== "mods/fancy_loader.js"){
         prompt_quene.push(()=>{
             window.promptConfirm(

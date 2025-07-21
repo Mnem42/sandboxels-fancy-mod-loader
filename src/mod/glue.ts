@@ -6,10 +6,10 @@ export {}; // Ensure this file is a module
 */
 declare global {
     interface Window { 
-        queuedMods: Array<string>;
+        queuedMods: string[]
         elements: {[name: string]: Element}
         behaviors: {[name: string]: Behaviour}
-        enabledMods: [string]
+        enabledMods: string[]
 
         promptConfirm: (
             text: string, 
