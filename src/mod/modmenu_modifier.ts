@@ -1,4 +1,5 @@
 import { Mod } from "../loader/cfg_loader"
+import { show_modinfo } from "./modinfo_menu"
 
 export function add_modinfo_btn(mod: Mod){
     let menu = document.getElementById("modManagerList")
@@ -14,14 +15,9 @@ export function add_modinfo_btn(mod: Mod){
             elem.classList.add("infobtn")
             elem.innerText = 'i'
             elem.onclick = () =>{
-                window.promptText(
-                    `Version: ${mod.cfg.mod.version}\n\
-                    Description: ${mod.cfg.mod.description}`,
-                    () => {
-                        // Make the mod manager visible again
-                        window.showModManager()
-                    },
-                    mod.cfg.mod.name ?? mod.path_from
+                show_modinfo(
+                    mod.cfg.mod.version, 
+                    undefined
                 )
             }
 
