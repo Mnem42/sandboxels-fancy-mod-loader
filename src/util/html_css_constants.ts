@@ -1,3 +1,9 @@
+/// Extra styles put at the level of the entire document
+export const ROOT_EXTRA_STYLES = `\
+    .infobtn { color: #0000FF; margin-left: 5px;}\
+    .infobtn:hover {color: #6666FF}\
+`
+
 /// Base HTML to generate the mod info menu from
 export const MODINFO_BASE_HTML = `
 <div id="modInfo" class="menuScreen">
