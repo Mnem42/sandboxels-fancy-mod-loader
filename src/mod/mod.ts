@@ -16,7 +16,6 @@ load_mods(prompt_quene, mod =>{
     mod.load_mod(prompt_quene)
 
     add_modinfo_btn(mod)
-
 })
 
 

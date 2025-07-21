@@ -24,6 +24,7 @@ type ElementImport = {
 
 // Mod config
 type _ModConfig = {
+    name: string,
     version: string
     description: string
     entry_point: string
@@ -31,7 +32,7 @@ type _ModConfig = {
     incompatible_mods: Array<string>
 }
 
-export type ModConfig = Optional<_ModConfig, "incompatible_mods" | "description">
+export type ModConfig = Optional<_ModConfig, "incompatible_mods" | "description" | "name">
 
 export type ParsedPackageConfig = {
     mod: ModConfig

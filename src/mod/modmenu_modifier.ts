@@ -23,7 +23,7 @@ export function add_modinfo_btn(mod: Mod){
                         // Make the mod manager visible again
                         window.showModManager()
                     },
-                    mod.path_from
+                    mod.cfg.mod.name ?? mod.path_from
                 )
             }
 
